@@ -18,12 +18,12 @@ class App extends Component {
         <NavBar />
         <main className="container">
           <Switch>
-            <Route path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/catalogue" component={Movies} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
+            <Route path="/" component={Home} />
           </Switch>
         </main>
       </div>
