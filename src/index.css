@@ -12,6 +12,13 @@ code {
     monospace;
 }
 
+.movie-container {
+  padding-top: 5rem;
+}
+
+.movie-container h1 {
+  margin-bottom: 3rem;
+}
 
 .movies-grid {
   width: 100%;
