@@ -7,6 +7,8 @@ class Movies extends Component {
   state = {
     movies: [],
     genres: [],
+    itemsPerPage: 10,
+    currentGenre: ""
   };
 
   componentDidMount() {
@@ -15,53 +17,36 @@ class Movies extends Component {
     this.setState({ movies, genres });
   }
 
+  selectGenre = (genre) => {
+      this.setState({ currentGenre: genre})
+
+  }
+
   render() {
+    const { movies, genres, currentGenre } = this.state;
+    console.log(currentGenre);
     return (
       <div className="row">
         <div className="col-md-3">
           <ul class="list-group">
-            <li class="list-group-item active">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+          {genres.map(g => 
+              <li className={currentGenre === g.name ? "list-group-item active" : "list-group-item"} onClick={() => this.selectGenre(g.name)}>{g.name}</li>
+            )}
           </ul>
         </div>
         <div className="col-md-9">
           <h1>Movies</h1>
           <div className="movies-grid">
-            <div className="movie-card" >
-              <div className="img-container">
-                <img src={shawshank} alt="" className="card-img-top" />
+            {movies.map(m => (
+              <div className="movie-card">
+                <div className="img-container">
+                  <img src={shawshank} alt="" className="card-img-top" />
+                </div>
+                <div className="card-body">
+                  <p className="card-text">{m.title}</p>
+                </div>
               </div>
-              <div className="card-body">
-                <p className="card-text">Shawshank Redemption</p>
-              </div>
-            </div>
-            <div className="movie-card" >
-              <div className="img-container">
-                <img src={shawshank} alt="" className="card-img-top" />
-              </div>
-              <div className="card-body">
-                <p className="card-text">Shawshank Redemption</p>
-              </div>
-            </div>
-            <div className="movie-card" >
-              <div className="img-container">
-                <img src={shawshank} alt="" className="card-img-top" />
-              </div>
-              <div className="card-body">
-                <p className="card-text">Shawshank Redemption</p>
-              </div>
-            </div>
-            <div className="movie-card" >
-              <div className="img-container">
-                <img src={shawshank} alt="" className="card-img-top" />
-              </div>
-              <div className="card-body">
-                <p className="card-text">Shawshank Redemption</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
