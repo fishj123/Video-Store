@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
-        <main className="container">
+        <main className="container-fluid">
           <Switch>
             <Route path="/about" component={About} />
             <Route path="/catalogue" component={Movies} />
