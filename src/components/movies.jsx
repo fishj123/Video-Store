@@ -49,7 +49,7 @@ class Movies extends Component {
     const displayedMovies = paginate(movies, currentPage, itemsPerPage);
 
     return (
-      <div className="row movie-container">
+      <div className="row content-container">
         <div className="col-md-3">
           <GenresList
             genres={this.state.genres}
