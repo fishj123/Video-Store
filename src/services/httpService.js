@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = process.env.VIDEO_STORE_API_URL;
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+console.log(axios.defaults)
 
 // this is handling all unexpected errors globally
 axios.interceptors.response.use(null, error => {

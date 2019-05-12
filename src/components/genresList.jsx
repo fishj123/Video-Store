@@ -8,7 +8,7 @@ const GenresList = ({ genres, currentGenre, selectGenre }) => {
                 <li
                     className={
                         currentGenre === g.name
-                            ? "list-group-item active"
+                            ? "list-group-item my-active"
                             : "list-group-item"
                     }
                     onClick={() => selectGenre(g.name)}

@@ -1,3 +1,4 @@
+import http from "./httpService";
 
 const genres = [
     {
@@ -26,8 +27,7 @@ const genres = [
     }
 ]
 
-function getGenres() {
-    return genres;
+export function getGenres() {
+    return http.get("https://imbd-clone-api.herokuapp.com/api/genres")
 }
 
-module.exports.getGenres = getGenres;

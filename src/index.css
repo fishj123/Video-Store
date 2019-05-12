@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.-link, .-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 .movie-container {
   padding-top: 5rem;
 }
@@ -24,16 +29,35 @@ code {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 25rem;
   grid-gap: 2rem;
   min-height: 100vh;
 }
 
 .img-container {
-  height: 15rem;
+  height: 20rem;
+}
+
+.movie-card:hover {
+  -webkit-box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
+-moz-box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
+box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
+}
+
+.movie-card {
+  height: 25rem;
 }
 
 .movie-card .img-container img {
   max-height: 100%;
   max-width: 100%;
   width: auto;
+}
+
+.card-text {
+  font-weight: bold;
+}
+
+.list-group-item.my-active {
+  background-color: rgb(103, 182, 103);
 }

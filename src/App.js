@@ -8,6 +8,7 @@ import About from "./components/about";
 import Movies from "./components/movies";
 import Register from "./components/register";
 import Login from "./components/login";
+import MoviePage from './components/moviePage';
 import Logout from "./components/logout";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
         <NavBar />
         <main className="container-fluid">
           <Switch>
+            <Route path="/movie/:title" component={MoviePage} />
             <Route path="/about" component={About} />
             <Route path="/catalogue" component={Movies} />
             <Route path="/register" component={Register} />
