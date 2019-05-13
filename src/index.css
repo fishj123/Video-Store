@@ -110,7 +110,11 @@ code {
 
 .img-container {
   height: 20rem;
+  width: 15rem;
+  margin: auto;
+  margin-top: 1rem;
 }
+
 
 .movie-card:hover {
   -webkit-box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);

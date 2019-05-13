@@ -45,7 +45,6 @@ class Register extends Form {
     };
 
   render() {
-
     return (
       <React.Fragment>
         <h1>Register</h1>

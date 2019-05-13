@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
+import authService from "../services/authService";
 
 class NavBar extends Component {
   state = {};
   render() {
+    const { user } = this.props;
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
         <NavLink className="navbar-brand" to="/">
@@ -22,19 +24,19 @@ class NavBar extends Component {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/register">
+              {!user && <NavLink className="nav-link" to="/register">
                 Register
-              </NavLink>
+              </NavLink>}
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/login">
+              {!user && <NavLink className="nav-link" to="/login">
                 Login
-              </NavLink>
+              </NavLink>}
             </li>     
             <li className="nav-item">
-              <NavLink className="nav-link" to="/logout">
+              {user && <NavLink className="nav-link" to="/logout">
                 Logout
-              </NavLink>
+              </NavLink>}
             </li>         
           </ul>
         </div>

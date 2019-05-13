@@ -1,7 +1,7 @@
 import http from './httpService';
 import jwtDecode from 'jwt-decode';
 
-const apiEndpoint = "http://localhost:6500/api/auth/"
+const apiEndpoint = "https://imbd-clone-api.herokuapp.com/api/auth/"
 const tokenKey = "token"
 
 http.setJwt(getJwt());

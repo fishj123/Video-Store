@@ -23,7 +23,7 @@ class Login extends Form {
       const { data } = this.state;
       await auth.login(data.username, data.password);
       const { state } = this.props.location;
-      // redirect to movies page and reload application
+      // redirect to home page and reload application
       // if they are logging in after redirect from a protected route they are sent back to where they tried to access
       window.location = state ? state.from.pathname : "/";
     } catch (ex) {
