@@ -19,10 +19,13 @@ class MoviePage extends Component {
             <p>Genre: {movie.genre.name}</p>
             <p>Rental Cost: £{movie.rentalCost} per day</p>
             <p>Number in stock: {movie.copies}</p>
+            <button className="btn btn-primary">
+              Rent this movie
+            </button>
           </div>
         </div>
         <div className="row">
-          <p>Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here... Some text about the movie here...</p>
+          <p className="movie-synopsis">{movie.synopsis}</p>
         </div>
       </div>
     );

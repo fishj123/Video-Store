@@ -59,6 +59,7 @@ class Movies extends Component {
         </div>
         <div className="col-md-9">
           <h1>Movies</h1>
+          {displayedMovies.length === 0 && currentGenre !== "All Genres" && <p>There are no {currentGenre} movies available at this time.</p>}
           <MovieCard displayedMovies={displayedMovies} />
           <MoviesPagination
             getPagesCount={this.getPagesCount}

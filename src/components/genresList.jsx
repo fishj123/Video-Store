@@ -3,7 +3,7 @@ import React from 'react';
 const GenresList = ({ genres, currentGenre, selectGenre }) => {
 
     return ( 
-        <ul class="list-group" style={{ cursor: "pointer" }}>
+        <ul className="list-group" style={{ cursor: "pointer" }}>
             {genres.map(g => (
                 <li
                     className={

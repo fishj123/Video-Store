@@ -4,6 +4,28 @@
 --light-color: #F8F7F2;
 } 
 
+* {
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
+
 
 body {
   margin: 0;
@@ -19,6 +41,13 @@ code {
     monospace;
 }
 
+
+.content-container {
+  padding-top: 5rem;
+}
+
+/* navigation styles */
+
 .navbar {
   background-color: var(--primary-color);
 }
@@ -32,9 +61,39 @@ code {
   color: inherit;
 }
 
-.content-container {
-  padding-top: 5rem;
+/* homepage styles */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
 }
+
+.hero h1 {
+  font-family: 'Racing Sans One';
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.how-it-works {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  left: 8rem;
+  text-align: left;
+}
+
+
+
+
+
+
+
+
+/* catalogue styles */
 
 .movie-container h1 {
   margin-bottom: 3rem;
@@ -65,6 +124,8 @@ box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
 
 .img-container img {
   max-height: 100%;
+  min-height: 100%;
+  min-width: 100%;
   max-width: 100%;
   width: auto;
 }
@@ -77,6 +138,7 @@ box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
   background-color: var(--primary-color)
 }
 
+/* movie page styles */
 
 .movie-page-img-container {
   height: 30rem;
@@ -89,3 +151,11 @@ box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
   max-width: 100%;
   width: auto;
 }
+
+.movie-synopsis {
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+

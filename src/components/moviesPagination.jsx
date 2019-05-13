@@ -16,7 +16,7 @@ const MoviesPagination = props => {
               }
               onClick={() => handlePageChange(page)}
             >
-              <a className="page-link" href="#">
+              <a className="page-link">
                 {page}
               </a>
             </li>
