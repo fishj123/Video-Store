@@ -8,6 +8,7 @@ import Movies from "./components/movies";
 import Register from "./components/register";
 import Login from "./components/login";
 import MoviePage from './components/moviePage';
+import UserDashboard from './components/userDashboard';
 import auth from './services/authService';
 import Logout from "./components/logout";
 
@@ -31,6 +32,7 @@ class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
+            <Route path="/me" render={props => <UserDashboard {...props} user={user} />} />
             <Route path="/" component={Home} />
             <Redirect to="/" />
           </Switch>

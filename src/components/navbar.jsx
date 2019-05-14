@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from "react-router-dom";
 import authService from "../services/authService";
 
 class NavBar extends Component {
@@ -15,7 +15,7 @@ class NavBar extends Component {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" to="/">
-                Home 
+                Home
               </NavLink>
             </li>
             <li className="nav-item">
@@ -24,20 +24,33 @@ class NavBar extends Component {
               </NavLink>
             </li>
             <li className="nav-item">
-              {!user && <NavLink className="nav-link" to="/register">
-                Register
-              </NavLink>}
+              {!user && (
+                <NavLink className="nav-link" to="/register">
+                  Register
+                </NavLink>
+              )}
             </li>
             <li className="nav-item">
-              {!user && <NavLink className="nav-link" to="/login">
-                Login
-              </NavLink>}
-            </li>     
+              {!user && (
+                <NavLink className="nav-link" to="/login">
+                  Login
+                </NavLink>
+              )}
+            </li>
             <li className="nav-item">
-              {user && <NavLink className="nav-link" to="/logout">
-                Logout
-              </NavLink>}
-            </li>         
+              {user && (
+                <NavLink className="nav-link" to="/me">
+                  {user.name}
+                </NavLink>
+              )}
+            </li>
+            <li className="nav-item">
+              {user && (
+                <NavLink className="nav-link" to="/logout">
+                  Logout
+                </NavLink>
+              )}
+            </li>
           </ul>
         </div>
       </nav>

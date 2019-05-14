@@ -5,6 +5,7 @@ import { getGenres } from "../services/genresService";
 import { paginate } from "../utils/paginate";
 import MovieCard from "./movieCard";
 import MoviesPagination from "./moviesPagination";
+import Sort from "./moviesSort";
 import _ from "lodash";
 
 class Movies extends Component {
@@ -14,11 +15,12 @@ class Movies extends Component {
     itemsPerPage: 8,
     currentPage: 1,
     currentGenre: "All Genres",
+    sortColumn: { path: "title", order: "asc" },
   };
 
   async componentDidMount() {
-    const {data: movies } = await getMovies();
-    const { data } = await getGenres()
+    const { data: movies } = await getMovies();
+    const { data } = await getGenres();
     const genres = [{ _id: "", name: "All Genres" }, ...data];
     this.setState({ movies, genres });
   }
@@ -31,6 +33,13 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
 
+  handleSort = order => {
+    console.log(order);
+    const sortColumn = { ...this.state.sortColumn };
+    sortColumn.order = order;
+    this.setState({ sortColumn });
+  };
+
   getPagesCount = () => {
     const { movies, itemsPerPage } = this.state;
     const pagesCount = Math.ceil(movies.length / itemsPerPage);
@@ -40,13 +49,21 @@ class Movies extends Component {
   };
 
   render() {
-    let { movies, currentGenre, itemsPerPage, currentPage } = this.state;
+    let {
+      movies,
+      currentGenre,
+      itemsPerPage,
+      currentPage,
+      sortColumn,
+    } = this.state;
 
     if (currentGenre !== "All Genres") {
       movies = movies.filter(movie => movie.genre.name === currentGenre);
     }
 
-    const displayedMovies = paginate(movies, currentPage, itemsPerPage);
+    const sorted = _.orderBy(movies, [sortColumn.path], [sortColumn.order]);
+
+    const displayedMovies = paginate(sorted, currentPage, itemsPerPage);
 
     return (
       <div className="row content-container">
@@ -56,10 +73,15 @@ class Movies extends Component {
             currentGenre={this.state.currentGenre}
             selectGenre={this.selectGenre}
           />
+
+          <Sort handleSort={this.handleSort} />
         </div>
+
         <div className="col-md-9">
           <h1>Movies</h1>
-          {displayedMovies.length === 0 && currentGenre !== "All Genres" && <p>There are no {currentGenre} movies available at this time.</p>}
+          {displayedMovies.length === 0 && currentGenre !== "All Genres" && (
+            <p>There are no {currentGenre} movies available at this time.</p>
+          )}
           <MovieCard displayedMovies={displayedMovies} />
           <MoviesPagination
             getPagesCount={this.getPagesCount}

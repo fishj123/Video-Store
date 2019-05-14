@@ -4,7 +4,6 @@ class MoviePage extends Component {
   state = {};
   render() {
     const { movie } = this.props.location.state;
-    console.log(movie);
     return (
       <div className="container content-container">
         <h1>{movie.title}</h1>
