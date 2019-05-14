@@ -78,7 +78,11 @@ class Movies extends Component {
 
         <div className="col-md-9">
           <h1>Movies</h1>
-          {!movies && <p>Please wait whilst we load the available movies</p>}
+          {this.state.movies.length === 0 && <div class="d-flex justify-content-center mt-5">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>}
           {displayedMovies.length === 0 && currentGenre !== "All Genres" && (
             <p>There are no {currentGenre} movies available at this time.</p>
           )}
