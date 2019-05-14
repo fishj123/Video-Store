@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Route, Redirect, Switch } from "react-router-dom";
 import NavBar from "./components/navbar";
@@ -27,7 +26,7 @@ class App extends Component {
         <NavBar user={user}/>
         <main className="container-fluid">
           <Switch>
-            <Route path="/movie/:title" component={MoviePage} />
+            <Route path="/movie/:title" render={props => <MoviePage {...props} user={user} />} />
             <Route path="/catalogue" component={Movies} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />

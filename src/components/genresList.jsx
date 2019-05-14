@@ -5,7 +5,7 @@ const GenresList = ({ genres, currentGenre, selectGenre }) => {
     return ( 
         <ul className="list-group" style={{ cursor: "pointer" }}>
             {genres.map(g => (
-                <li
+                <li key={g.name}
                     className={
                         currentGenre === g.name
                             ? "list-group-item my-active"

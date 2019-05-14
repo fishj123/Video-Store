@@ -142,7 +142,7 @@ box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
   background-color: var(--primary-color)
 }
 
-.form-control {
+#sort {
   width: 50%;
 }
 
@@ -168,6 +168,27 @@ box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
 .movie-synopsis {
   width: 80%;
   text-align: center;
+  margin: auto;
+}
+
+/* register and login styles */
+
+.user-form-container {
+  display: flex;
+  align-items: center;
+  height: 80vh;
+}
+
+.user-form {
+  width: 30%;
+  padding: 2rem;
+  /* color: white; */
+  margin: auto;
+  background-color: var(--light-color);
+}
+
+.user-form .input {
+  width: 60%;
   margin: auto;
 }
 

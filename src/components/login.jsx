@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
 import auth from "../services/authService";
 import Form from "./common/form";
@@ -38,11 +38,16 @@ class Login extends Form {
 
   render() {
     return (
-      <form className="mt-3" onSubmit={this.handleSubmit}>
-        {this.renderInput("username", "Email", "email")}
-        {this.renderInput("password", "Password", "password")}
-        {this.renderButton("Login")}
-      </form>
+      <div className="user-form-container">
+        <div className="user-form">
+          <h3>Login</h3>
+          <form className="mt-3 input" onSubmit={this.handleSubmit}>
+            {this.renderInput("username", "Email", "email")}
+            {this.renderInput("password", "Password", "password")}
+            {this.renderButton("Login")}
+          </form>
+        </div>
+      </div>
     );
   }
 }

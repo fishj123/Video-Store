@@ -1,6 +1,6 @@
 import React from "react";
-import shawshank from "../images/shawshank.jpg";
 import { Link } from 'react-router-dom';
+import slugify from 'slugify';
 
 
 const MovieCard = props => {
@@ -8,9 +8,9 @@ const MovieCard = props => {
   return (
     <div className="movies-grid">
       {displayedMovies.map(m => (
-        <div className="movie-card" style={{ cursor: "pointer" }}>
+        <div className="movie-card" key={m._id} style={{ cursor: "pointer" }}>
           <Link className="-link" to={{
-            pathname: "/movie/" + m.title,
+            pathname: "/movie/" + slugify(m.title, { lower: true }),
             state: {
               movie: m
             }

@@ -34,7 +34,6 @@ class Movies extends Component {
   };
 
   handleSort = order => {
-    console.log(order);
     const sortColumn = { ...this.state.sortColumn };
     sortColumn.order = order;
     this.setState({ sortColumn });
@@ -79,6 +78,7 @@ class Movies extends Component {
 
         <div className="col-md-9">
           <h1>Movies</h1>
+          {!movies && <p>Please wait whilst we load the available movies</p>}
           {displayedMovies.length === 0 && currentGenre !== "All Genres" && (
             <p>There are no {currentGenre} movies available at this time.</p>
           )}

@@ -1,9 +1,17 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 class MoviePage extends Component {
   state = {};
+
+navigateToLogin = () => {
+
+}
+
+
   render() {
     const { movie } = this.props.location.state;
+    const { user} = this.props;
     return (
       <div className="container content-container">
         <h1>{movie.title}</h1>
@@ -18,9 +26,12 @@ class MoviePage extends Component {
             <p>Genre: {movie.genre.name}</p>
             <p>Rental Cost: £{movie.rentalCost} per day</p>
             <p>Number in stock: {movie.copies}</p>
-            <button className="btn btn-primary">
+            {user && <button className="btn btn-primary">
               Rent this movie
-            </button>
+            </button>}
+            {!user && <Link to="/login" className="btn btn-primary">
+              Login to rent this movie
+            </Link>}
           </div>
         </div>
         <div className="row">
