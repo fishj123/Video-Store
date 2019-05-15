@@ -77,7 +77,7 @@ class Movies extends Component {
         </div>
 
         <div className="col-md-9">
-          <h1>Movies</h1>
+          <h3>Movies</h3>
           {this.state.movies.length === 0 && <div className="d-flex justify-content-center mt-5">
             <div className="spinner-border" role="status">
               <span className="sr-only">Loading...</span>

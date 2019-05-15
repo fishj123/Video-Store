@@ -88,7 +88,7 @@ class MoviePage extends Component {
 
     return (
       <div className="container content-container">
-        <h1>{movie.title}</h1>
+        <h3>{movie.title}</h3>
         <div className="row m-5">
           <div className="col-md-6">
             <div className="movie-page-img-container">

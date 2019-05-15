@@ -169,6 +169,7 @@ box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
   width: 80%;
   text-align: center;
   margin: auto;
+  margin-bottom: 5rem;
 }
 
 /* register and login styles */
