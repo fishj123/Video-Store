@@ -28,6 +28,14 @@ export function getCurrentUser() {
     }
 }
 
+
+export async function getUserFromDb() {
+    const jwtUser = getCurrentUser();
+    if (!jwtUser) return null;
+    const user = http.get("https://imbd-clone-api.herokuapp.com/api/users/" + jwtUser._id);
+    return user;
+}
+
 export function getJwt() {
     return localStorage.getItem(tokenKey);
 }
@@ -37,5 +45,6 @@ export default {
     logout,
     getCurrentUser,
     loginWithJwt,
-    getJwt
+    getJwt,
+    getUserFromDb
 }

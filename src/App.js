@@ -14,8 +14,8 @@ import Logout from "./components/logout";
 class App extends Component {
   state = {};
 
-  componentDidMount() {
-    const user = auth.getCurrentUser();
+ async componentDidMount() {
+    const user = await auth.getCurrentUser();
     this.setState({ user });
   };
 

@@ -1,14 +1,25 @@
 import React, { Component } from "react";
+import auth from '../services/authService';
 
 class UserDashboard extends Component {
-  state = {};
+  state = {
+    user: {}
+  };
+
+
+  async componentDidMount() {
+    const dbUser = await auth.getUserFromDb()
+    if (!dbUser) return;
+    this.setState({ user: dbUser.data[0] })
+  }
 
   render() {
-    const { user } = this.props;
+    const { user } = this.state;
+    console.log(user.name)
     return (
         
       <React.Fragment>
-        <h1>Dashboard</h1>
+        <h3>Dashboard - {user.name}</h3>
       </React.Fragment>
     );
   }
