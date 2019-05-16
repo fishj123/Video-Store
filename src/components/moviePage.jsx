@@ -110,7 +110,7 @@ class MoviePage extends Component {
             )}
             {user.name && button === "stop-rent" && (
               <button
-                className="btn btn-primary"
+                className="btn btn-primary" id="btn-reverse"
                 onClick={() => this.stopRent(movie)}
               >
                 Stop renting

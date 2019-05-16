@@ -26,6 +26,7 @@ class Movies extends Component {
   }
 
   selectGenre = genre => {
+    this.setState({ currentPage: 1 });
     this.setState({ currentGenre: genre });
   };
 
@@ -39,13 +40,13 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
-  getPagesCount = () => {
-    const { movies, itemsPerPage } = this.state;
-    const pagesCount = Math.ceil(movies.length / itemsPerPage);
-    if (pagesCount === 1) return null;
-    const pages = _.range(1, pagesCount + 1);
-    return pages;
-  };
+  // getPagesCount = () => {
+  //   const { movies, itemsPerPage } = this.state;
+  //   const pagesCount = Math.ceil(movies.length / itemsPerPage);
+  //   if (pagesCount === 1) return null;
+  //   const pages = _.range(1, pagesCount + 1);
+  //   return pages;
+  // };
 
   render() {
     let {
@@ -74,6 +75,13 @@ class Movies extends Component {
           />
 
           <Sort handleSort={this.handleSort} />
+
+          <MoviesPagination
+            itemsPerPage={itemsPerPage}
+            movies={movies}
+            handlePageChange={this.handlePageChange}
+            currentPage={currentPage}
+          />
         </div>
 
         <div className="col-md-9">
@@ -88,9 +96,10 @@ class Movies extends Component {
           )}
           <MovieCard displayedMovies={displayedMovies} />
           <MoviesPagination
-            getPagesCount={this.getPagesCount}
+            itemsPerPage={itemsPerPage}
+            movies={movies}
             handlePageChange={this.handlePageChange}
-            currentPage={this.state.currentPage}
+            currentPage={currentPage}
           />
         </div>
       </div>

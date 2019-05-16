@@ -26,6 +26,13 @@ h3 {
   background-color: var(--secondary-color);
 }
 
+#btn-reverse {
+  background-color: var(--secondary-color);
+}
+
+#btn-reverse:hover {
+  background-color: var(--primary-color);
+}
 
 body {
   margin: 0;
@@ -150,6 +157,7 @@ box-shadow: 7px 7px 16px -8px rgba(56,56,56,1);
   text-align: left;
   padding-left: 0.5rem;
 }
+
 
 /* movie page styles */
 

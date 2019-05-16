@@ -1,26 +1,44 @@
 import React, { Component } from "react";
-import auth from '../services/authService';
+import auth from "../services/authService";
+import { Link } from 'react-router-dom';
+import slugify from 'slugify';
+import http from '../services/httpService';
+
 
 class UserDashboard extends Component {
   state = {
-    user: {}
+    user: {},
   };
 
-
   async componentDidMount() {
-    const dbUser = await auth.getUserFromDb()
+    const dbUser = await auth.getUserFromDb();
     if (!dbUser) return;
-    this.setState({ user: dbUser.data[0] })
+    this.setState({ user: dbUser.data[0] });
   }
+
 
   render() {
     const { user } = this.state;
-    console.log(user.name)
+    if (!user.name) return null;
+
     return (
-        
-      <React.Fragment>
-        <h3>Dashboard - {user.name}</h3>
-      </React.Fragment>
+      <div className="content-container">
+        <div className="row">
+          <section className="col-md-3">
+            <h3>My Rentals</h3>
+            <ul className="list-group">
+              {user.rentals.map(movie => (
+                <li key={movie._id} className="list-group-item">
+                  {movie.name}
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section className="col-md-9">
+            <h3>Admin Dashboard - {user.name}</h3>
+          </section>
+        </div>
+      </div>
     );
   }
 }
