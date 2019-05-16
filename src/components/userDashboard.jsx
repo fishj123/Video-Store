@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import auth from "../services/authService";
-import { Link } from 'react-router-dom';
-import slugify from 'slugify';
-import http from '../services/httpService';
-
+import { Link } from "react-router-dom";
+import slugify from "slugify";
+import http from "../services/httpService";
+import MovieForm from './movieForm';
 
 class UserDashboard extends Component {
   state = {
@@ -16,6 +16,10 @@ class UserDashboard extends Component {
     this.setState({ user: dbUser.data[0] });
   }
 
+  handleMovieSubmit = (e) => {
+    e.preventDefault()
+    console.log("submited")
+  }
 
   render() {
     const { user } = this.state;
@@ -36,6 +40,7 @@ class UserDashboard extends Component {
           </section>
           <section className="col-md-9">
             <h3>Admin Dashboard - {user.name}</h3>
+           < MovieForm />
           </section>
         </div>
       </div>

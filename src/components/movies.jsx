@@ -40,14 +40,6 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
-  // getPagesCount = () => {
-  //   const { movies, itemsPerPage } = this.state;
-  //   const pagesCount = Math.ceil(movies.length / itemsPerPage);
-  //   if (pagesCount === 1) return null;
-  //   const pages = _.range(1, pagesCount + 1);
-  //   return pages;
-  // };
-
   render() {
     let {
       movies,
