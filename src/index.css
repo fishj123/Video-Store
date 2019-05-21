@@ -88,8 +88,6 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  position: relative;
-  left: 8rem;
   text-align: left;
 }
 
