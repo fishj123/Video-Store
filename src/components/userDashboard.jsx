@@ -28,7 +28,7 @@ class UserDashboard extends Component {
     return (
       <div className="content-container">
         <div className="row">
-          <section className="col-md-3">
+          <section className="col-md-3 dash-column-left">
             <h3>My Rentals</h3>
             <ul className="list-group">
               {user.rentals.map(movie => (
@@ -38,9 +38,21 @@ class UserDashboard extends Component {
               ))}
             </ul>
           </section>
-          <section className="col-md-9">
+          <section className="col-md-9" style={{minHeight: "70vh"}}>
+
+          {user.isAdmin && <section>
             <h3>Admin Dashboard - {user.name}</h3>
+            <div className="movie-form-container">
            < MovieForm />
+            </div>
+            </section>}
+
+            {!user.isAdmin && <section>
+              <h3>User Dashboard - {user.name}</h3>
+              <p style={{width: "60%", margin: "auto"}}>You do not have admin rights therefore you cannot upload new movies to the database. If you think you should have admin rights please email us at <a href="mailto:thisemailisfake@gmail.com">ThisEmailIsFake@gmail.com</a></p>
+            </section>}
+
+
           </section>
         </div>
       </div>

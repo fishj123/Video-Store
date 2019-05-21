@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from "./common/form";
 import Joi from 'joi-browser';
+import { saveMovie } from '../services/moviesService';
 
 class MovieForm extends Form {
   state = {
@@ -36,7 +37,14 @@ class MovieForm extends Form {
       .label("Synopsis"),
   };
 
+  doSubmit = async () => {
+    console.log("Movie form submitted");
+    await saveMovie(this.state.data);
+    window.location = "/catalogue"
+  } 
+
   render() {
+    console.log(this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         {this.renderInput("title", "Title")}
@@ -45,7 +53,7 @@ class MovieForm extends Form {
         {this.renderInput("rentalCost", "Rental Cost")}
         {this.renderInput("image", "Image")}
         {this.renderInput("synopsis", "Synopsis")}
-        {this.renderButton("Save")};
+        {this.renderButton("Save")}
       </form>
     );
   }

@@ -7,6 +7,7 @@ import MovieCard from "./movieCard";
 import MoviesPagination from "./moviesPagination";
 import Sort from "./moviesSort";
 import _ from "lodash";
+import SearchBox from "./common/searchBox";
 
 class Movies extends Component {
   state = {
@@ -14,6 +15,7 @@ class Movies extends Component {
     genres: [],
     itemsPerPage: 8,
     currentPage: 1,
+    searchQuery: "",
     currentGenre: "All Genres",
     sortColumn: { path: "title", order: "asc" },
   };
@@ -40,6 +42,14 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
+  handleSearch = query => {
+    this.setState({
+      searchQuery: query,
+      currentGenre: "All Genres",
+      currentPage: 1,
+    });
+  };
+
   render() {
     let {
       movies,
@@ -47,14 +57,25 @@ class Movies extends Component {
       itemsPerPage,
       currentPage,
       sortColumn,
+      searchQuery,
     } = this.state;
 
+    // this filters the movies if a genre is selected
     if (currentGenre !== "All Genres") {
       movies = movies.filter(movie => movie.genre.name === currentGenre);
     }
 
+    // this filters the movies if a search is made
+    if (searchQuery.trim() !== "") {
+      movies = movies.filter(movie =>
+        movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // this orders the movies based on A-Z selected
     const sorted = _.orderBy(movies, [sortColumn.path], [sortColumn.order]);
 
+    // this paginates the movies that should be displayed
     const displayedMovies = paginate(sorted, currentPage, itemsPerPage);
 
     return (
@@ -78,13 +99,20 @@ class Movies extends Component {
 
         <div className="col-md-9">
           <h3>Movies</h3>
-          {this.state.movies.length === 0 && <div className="d-flex justify-content-center mt-5">
-            <div className="spinner-border" role="status">
-              <span className="sr-only">Loading...</span>
+          {this.state.movies.length === 0 && (
+            <div className="d-flex justify-content-center mt-5">
+              <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
             </div>
-          </div>}
-          {displayedMovies.length === 0 && currentGenre !== "All Genres" && (
-            <p>There are no {currentGenre} movies available at this time.</p>
+          )}
+
+          <SearchBox
+            value={this.state.searchQuery}
+            onChange={this.handleSearch}
+          />
+          {displayedMovies.length === 0 && this.state.movies.length != "0" && (
+            <p>There are no movies that fit these search results.</p>
           )}
           <MovieCard displayedMovies={displayedMovies} />
           <MoviesPagination

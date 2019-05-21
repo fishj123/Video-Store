@@ -10,6 +10,7 @@ import MoviePage from './components/moviePage';
 import UserDashboard from './components/userDashboard';
 import auth from './services/authService';
 import Logout from "./components/logout";
+import PageNotFound from "./components/404";
 
 class App extends Component {
   state = {};
@@ -32,8 +33,11 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/me" render={props => <UserDashboard {...props} user={user} />} />
-            <Route path="/" component={Home} />
+            <Route path="/" exact component={Home} />
+            <Route path="/" component={PageNotFound} />
             <Redirect to="/" />
+            
+
           </Switch>
         </main>
       </div>
