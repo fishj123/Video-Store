@@ -1,6 +1,6 @@
 import http from './httpService';
 
-const apiEndpoint = "https://imbd-clone-api.herokuapp.com/api/movies/"
+const apiEndpoint = process.env.REACT_APP_VIDEO_STORE_API_URL + "movies/"
 
 
 function movieUrl(id) {
@@ -8,7 +8,7 @@ function movieUrl(id) {
 }
 
 export function getMovies() {
-    return http.get("https://imbd-clone-api.herokuapp.com/api/movies")
+    return http.get(apiEndpoint)
 }
 
 export function saveMovie(movie) {
@@ -18,7 +18,7 @@ export function saveMovie(movie) {
         return http.put(movieUrl(movie._id), body);
     }
 
-    return http.post("https://imbd-clone-api.herokuapp.com/api/movies", movie);
+    return http.post(apiEndpoint, movie);
 }
 
 

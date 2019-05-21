@@ -1,6 +1,8 @@
 import http from "./httpService";
 
+const apiEndpoint = process.env.REACT_APP_VIDEO_STORE_API_URL + "genres/"
+
 export function getGenres() {
-    return http.get("https://imbd-clone-api.herokuapp.com/api/genres")
+    return http.get(apiEndpoint)
 }
 

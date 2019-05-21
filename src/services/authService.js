@@ -1,7 +1,7 @@
 import http from './httpService';
 import jwtDecode from 'jwt-decode';
 
-const apiEndpoint = "https://imbd-clone-api.herokuapp.com/api/auth/"
+const apiEndpoint = process.env.REACT_APP_VIDEO_STORE_API_URL + "auth/"
 const tokenKey = "token"
 
 http.setJwt(getJwt());

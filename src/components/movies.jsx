@@ -95,6 +95,8 @@ class Movies extends Component {
             handlePageChange={this.handlePageChange}
             currentPage={currentPage}
           />
+
+         
         </div>
 
         <div className="col-md-9">
@@ -107,10 +109,11 @@ class Movies extends Component {
             </div>
           )}
 
-          <SearchBox
+          {this.state.movies.length !== 0 &&<SearchBox
             value={this.state.searchQuery}
             onChange={this.handleSearch}
-          />
+          />}
+          {this.state.movies.length !== 0 && <p>Currently displaying {movies.length} movie(s)</p>}
           {displayedMovies.length === 0 && this.state.movies.length != "0" && (
             <p>There are no movies that fit these search results.</p>
           )}
