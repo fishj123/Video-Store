@@ -7,6 +7,7 @@ class MoviePage extends Component {
   state = {
     user: { name: "", rentals: [] },
     button: "",
+    copies: 0,
   };
 
   async componentDidMount() {
@@ -18,6 +19,9 @@ class MoviePage extends Component {
       return;
     }
 
+    const { movie } = this.props.location.state;
+    this.setState({ movie });
+
     const button = this.checkRentals() ? "stop-rent" : "rent";
     this.setState({ button });
   }
@@ -27,6 +31,9 @@ class MoviePage extends Component {
 
     const button = "stop-rent";
     this.setState({ button });
+
+    movie.copies--;
+    this.setState({ movie });
 
     try {
       let { user } = { ...this.props };
@@ -48,6 +55,9 @@ class MoviePage extends Component {
 
     const button = "rent";
     this.setState({ button });
+
+    movie.copies++;
+    this.setState({ movie });
 
     try {
       const user = this.state.user;
@@ -82,51 +92,58 @@ class MoviePage extends Component {
   };
 
   render() {
-    const { movie } = this.props.location.state;
+    let movie = this.state.movie || this.props.location.state.movie;
     const user = this.state.user || {};
     const button = this.state.button;
 
+    let outOfStock = movie.copies === 0 ? true : false;
+
     return (
-      <div className="container content-container">
-        <h3>{movie.title}</h3>
-        <div className="row m-5">
-          <div className="col-md-6">
-            <div className="movie-page-img-container">
-              <img src={movie.image} alt={movie.title + " movie poster"} />
+      <React.Fragment>
+        <div className="container content-container">
+          <h3>{movie.title}</h3>
+          <div className="row m-5">
+            <div className="col-md-6">
+              <div className="movie-page-img-container">
+                <img src={movie.image} alt={movie.title + " movie poster"} />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <p>Title: {movie.title}</p>
+              <p>Genre: {movie.genre.name}</p>
+              <p>Rental Cost: £{movie.rentalCost} per day</p>
+              <p className={outOfStock ? "text-danger" : ""}>Number in stock: {movie.copies}</p>
+              {user.name && button === "rent" && (
+                <button
+                  className={outOfStock ? "btn btn-secondary disabled" : "btn btn-primary"}
+                  disabled={outOfStock}
+                  aria-disabled={outOfStock}
+                  onClick={() => this.handleRent(movie)}
+                >
+                  Rent movie
+                </button>
+              )}
+              {user.name && button === "stop-rent" && (
+                <button
+                  className="btn btn-primary"
+                  id="btn-reverse"
+                  onClick={() => this.stopRent(movie)}
+                >
+                  Stop renting
+                </button>
+              )}
+              {!user.name && (
+                <Link to="/login" className="btn btn-primary">
+                  Login to rent
+                </Link>
+              )}
             </div>
           </div>
-          <div className="col-md-6">
-            <p>Title: {movie.title}</p>
-            <p>Genre: {movie.genre.name}</p>
-            <p>Rental Cost: £{movie.rentalCost} per day</p>
-            <p>Number in stock: {movie.copies}</p>
-            {user.name && button === "rent" && (
-              <button
-                className="btn btn-primary"
-                onClick={() => this.handleRent(movie)}
-              >
-                Rent movie
-              </button>
-            )}
-            {user.name && button === "stop-rent" && (
-              <button
-                className="btn btn-primary" id="btn-reverse"
-                onClick={() => this.stopRent(movie)}
-              >
-                Stop renting
-              </button>
-            )}
-            {!user.name && (
-              <Link to="/login" className="btn btn-primary">
-                Login to rent
-              </Link>
-            )}
+          <div className="row">
+            <p className="movie-synopsis">{movie.synopsis}</p>
           </div>
         </div>
-        <div className="row">
-          <p className="movie-synopsis">{movie.synopsis}</p>
-        </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
