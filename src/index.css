@@ -76,7 +76,7 @@ code {
   flex-direction: column;
   justify-content: center;
   color: var(--light-color);
-  min-height: 100vh;
+  height: 50vh;
   background: rgb(193, 52, 88);
   background: linear-gradient(
     200deg,
@@ -85,38 +85,50 @@ code {
   );
 }
 
-.hero h3 {
+.how-it-works h3 {
   color: black;
 }
 
 .how-it-works {
-  text-align: left;
+  display: flex;
+  padding: 2rem;
+  flex-direction: column;
+  align-items: center;
 }
 
-.img-container-hero {
-  height: 90vmin;
-  width: 75vmin;
+.home-boxes-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 20rem;
+  padding-bottom: 2rem;
+}
+
+.how-it-works-boxes {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 5px;
+  border: 1px solid var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.number {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  text-align: center;
   margin: auto;
-  margin-top: 1rem;
-}
-
-.img-container-hero img {
-  max-height: 100%;
-  max-width: 100%;
 }
 
 .hero h1 {
   font-family: "Racing Sans One";
   color: var(--primary-color);
   text-decoration: underline;
-}
-
-.how-it-works {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: left;
 }
 
 /* catalogue styles */
