@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "./common/form";
 import Joi from 'joi-browser';
 import { saveMovie } from '../services/moviesService';
+import { toast } from "react-toastify";
 
 class MovieForm extends Form {
   state = {
@@ -39,8 +40,15 @@ class MovieForm extends Form {
 
   doSubmit = async () => {
     console.log("Movie form submitted");
-    await saveMovie(this.state.data);
-    window.location = "/catalogue"
+    try {
+
+      await saveMovie(this.state.data);
+      window.location = "/catalogue"
+      toast.success("Movie added to the database!")
+    } catch (ex) {
+      toast.error("Oops, something went wrong :(")
+      console.log(ex);
+    }
   } 
 
   render() {

@@ -3,6 +3,7 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import auth from "../services/authService";
 import * as userService from "../services/userService";
+import { toast } from "react-toastify";
 
 class Register extends Form {
   state = {
@@ -36,6 +37,7 @@ class Register extends Form {
       // redirect to home page on login
       window.location = "/";
     } catch (ex) {
+      toast.error("Oops, something went wrong :(")
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;

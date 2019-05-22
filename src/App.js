@@ -11,6 +11,9 @@ import UserDashboard from './components/userDashboard';
 import auth from './services/authService';
 import Logout from "./components/logout";
 import PageNotFound from "./components/404";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 
 class App extends Component {
   state = {};
@@ -24,6 +27,7 @@ class App extends Component {
     const { user } = this.state;
     return (
       <div className="App">
+      <ToastContainer />
         <NavBar user={user}/>
         <main className="container-fluid">
           <Switch>

@@ -17,21 +17,20 @@ h3 {
   font-size: 3rem;
 }
 
-.btn-primary {
+.my-btn-primary {
   background-color: var(--primary-color);
   border: var(--primary-color);
+  outline: none;
 }
 
-.btn-primary:hover {
-  background-color: var(--secondary-color);
+input:focus {
+  outline: none;
 }
 
 #btn-reverse {
   background-color: var(--secondary-color);
-}
-
-#btn-reverse:hover {
-  background-color: var(--primary-color);
+  color: var(--light-color);
+  outline: none;
 }
 
 body {
@@ -49,13 +48,14 @@ code {
 }
 
 .content-container {
-  padding-top: 5rem;
+  padding: 5rem;
 }
 
 /* navigation styles */
 
 .navbar {
   background-color: var(--primary-color);
+
 }
 
 .nav-link {
@@ -73,13 +73,41 @@ code {
 .hero {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  height: 80vh;
+  color: var(--light-color);
+  min-height: 100vh;
+  background: rgb(193, 52, 88);
+  background: linear-gradient(
+    200deg,
+    rgb(197, 89, 116) 10%,
+    rgb(124, 183, 190) 90%
+  );
+}
+
+.hero h3 {
+  color: black;
+}
+
+.how-it-works {
+  text-align: left;
+}
+
+.img-container-hero {
+  height: 90vmin;
+  width: 75vmin;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.img-container-hero img {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .hero h1 {
   font-family: "Racing Sans One";
-  color: var(--secondary-color);
+  color: var(--primary-color);
   text-decoration: underline;
 }
 
@@ -221,4 +249,15 @@ code {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+
+/* footer styles */
+
+footer {
+  height: 10rem;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

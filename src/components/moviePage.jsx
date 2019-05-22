@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import http from "../services/httpService";
 import auth, { getUserFromDb } from "../services/authService";
+import { toast } from "react-toastify";
 
 class MoviePage extends Component {
   state = {
@@ -45,8 +46,10 @@ class MoviePage extends Component {
 
       const { data: userDB } = await getUserFromDb();
       this.setState({ user: userDB[0] });
+      toast.success("Movie rented!")
     } catch (ex) {
       this.setState({ button: originalButton });
+      toast.error("Oops, something went wrong :(")
     }
   };
 
@@ -72,8 +75,10 @@ class MoviePage extends Component {
 
       const { data: userDB } = await getUserFromDb();
       this.setState({ user: userDB[0] });
+      toast.success("Movie returned!")
     } catch (ex) {
       this.setState({ button: originalButton });
+      toast.error("Oops, something went wrong :(")
     }
   };
 
@@ -115,7 +120,7 @@ class MoviePage extends Component {
               <p className={outOfStock ? "text-danger" : ""}>Number in stock: {movie.copies}</p>
               {user.name && button === "rent" && (
                 <button
-                  className={outOfStock ? "btn btn-secondary disabled" : "btn btn-primary"}
+                  className={outOfStock ? "btn btn-secondary disabled" : "btn my-btn-primary"}
                   disabled={outOfStock}
                   aria-disabled={outOfStock}
                   onClick={() => this.handleRent(movie)}
@@ -125,7 +130,7 @@ class MoviePage extends Component {
               )}
               {user.name && button === "stop-rent" && (
                 <button
-                  className="btn btn-primary"
+                  className="btn my-btn-primary"
                   id="btn-reverse"
                   onClick={() => this.stopRent(movie)}
                 >
@@ -133,7 +138,7 @@ class MoviePage extends Component {
                 </button>
               )}
               {!user.name && (
-                <Link to="/login" className="btn btn-primary">
+                <Link to="/login" className="btn my-btn-primary">
                   Login to rent
                 </Link>
               )}

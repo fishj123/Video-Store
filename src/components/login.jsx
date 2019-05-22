@@ -2,6 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import auth from "../services/authService";
 import Form from "./common/form";
+import { toast } from "react-toastify";
 
 class Login extends Form {
   state = {
@@ -27,6 +28,7 @@ class Login extends Form {
       // if they are logging in after redirect from a protected route they are sent back to where they tried to access
       window.location = state ? state.from.pathname : "/";
     } catch (ex) {
+      toast.error("Oops, something went wrong :(")
       console.log(ex);
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
