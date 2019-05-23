@@ -28,7 +28,7 @@ class UserDashboard extends Component {
     return (
       <div className="content-container">
         <div className="row">
-          <section className="col-md-3 dash-column-left">
+          <section className="col-md-12 col-xl-3 dash-column-left">
             <h3>My Rentals</h3>
             <ul className="list-group">
               {user.rentals.map(movie => (
@@ -38,7 +38,7 @@ class UserDashboard extends Component {
               ))}
             </ul>
           </section>
-          <section className="col-md-9" style={{minHeight: "70vh"}}>
+          <section className="col-md-12 col-xl-9" style={{minHeight: "70vh"}}>
 
           {user.isAdmin && <section>
             <h3>Admin Dashboard - {user.name}</h3>

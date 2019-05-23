@@ -21,6 +21,7 @@ class Movies extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo(0, 0)
     const { data: movies } = await getMovies();
     const { data } = await getGenres();
     const genres = [{ _id: "", name: "All Genres" }, ...data];
@@ -80,7 +81,7 @@ class Movies extends Component {
 
     return (
       <div className="row content-container">
-        <div className="col-md-3">
+        <div className="col-md-12 col-xl-3">
           <GenresList
             genres={this.state.genres}
             currentGenre={this.state.currentGenre}
@@ -97,7 +98,7 @@ class Movies extends Component {
           />
         </div>
 
-        <div className="col-md-9">
+        <div className="col-md-12 col-xl-9">
           <h3>Movies</h3>
           {this.state.movies.length === 0 && (
             <div className="d-flex justify-content-center mt-5">

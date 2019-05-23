@@ -9,6 +9,9 @@ class Home extends Component {
         <div className="row">
           <div className="col-md-12 hero">
             <h1>Video Store</h1>
+            <div className="hero-img-container">
+              <img className="camera-img" src="/images/camera.png" alt=""/>
+            </div>
           </div>
           <div className="col-md-12 how-it-works">
             <h3>How it works</h3>
@@ -28,7 +31,7 @@ class Home extends Component {
             </div>
           </div>
           <div className="col-md-12 mb-5">
-            <button className="btn my-btn-primary">Start Browsing</button>
+            <Link to="/catalogue" className="btn my-btn-primary">Start Browsing</Link>
           </div>
         </div>
       </React.Fragment>
