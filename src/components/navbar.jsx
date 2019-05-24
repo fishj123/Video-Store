@@ -68,7 +68,7 @@ toggleNav = () => {
             </li>
           </ul>
 
-        <i class="fas fa-bars" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={this.toggleNav}></i>
+        <i className="fas fa-bars" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={this.toggleNav}></i>
 
       </nav>
     );

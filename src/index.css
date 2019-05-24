@@ -87,22 +87,11 @@ code {
   text-decoration: none;
 }
 
-.my-nav-link:click {
-  text-decoration: none;
-}
-
-
 .fas.fa-bars {
   margin-left: auto;
   margin-right: 1rem;
   display: none;
   padding-top: 1rem;
-}
-
-.-link,
-.-link:hover {
-  text-decoration: none;
-  color: inherit;
 }
 
 #display-menu {
