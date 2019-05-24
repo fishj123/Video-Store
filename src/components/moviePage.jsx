@@ -12,7 +12,9 @@ class MoviePage extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo(0, 0)
     try {
+      
       const { data: user } = await getUserFromDb();
       if (!user) return;
       this.setState({ user: user[0] });

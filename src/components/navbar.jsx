@@ -4,58 +4,72 @@ import { NavLink } from "react-router-dom";
 
 class NavBar extends Component {
   state = {};
+
+toggleNav = () => {
+  const burgerMenu = document.getElementById("burger");
+  const navItems = document.querySelector(".navbar-links")
+
+  if (navItems.hasAttribute("id")) {
+    navItems.removeAttribute("id");
+    return;
+  }
+
+  navItems.setAttribute("id", "display-menu");
+  
+
+}
+
+
   render() {
     const { user } = this.props;
     return (
-      <nav className="navbar navbar-expand-lg navbar-light">
-        <NavLink className="navbar-brand" to="/">
+      <nav className="my-navbar">
+        <NavLink className="navbar-logo" to="/">
           Video Store
         </NavLink>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse"  id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/">
+          <ul className="navbar-links display-menu">
+            <li >
+              <NavLink className="my-nav-link" to="/" onClick={this.toggleNav}>
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/catalogue">
+            <li >
+            <NavLink className="my-nav-link" to="/catalogue" onClick={this.toggleNav}>
                 Catalogue
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li >
               {!user && (
-                <NavLink className="nav-link" to="/register">
+              <NavLink className="my-nav-link" to="/register" onClick={this.toggleNav}>
                   Register
                 </NavLink>
               )}
             </li>
-            <li className="nav-item">
+            <li >
               {!user && (
-                <NavLink className="nav-link" to="/login">
+              <NavLink className="my-nav-link" to="/login" onClick={this.toggleNav}>
                   Login
                 </NavLink>
               )}
             </li>
-            <li className="nav-item">
+            <li >
               {user && (
-                <NavLink className="nav-link" to="/me">
+              <NavLink className="my-nav-link" to="/me" onClick={this.toggleNav}>
                   {user.name}
                 </NavLink>
               )}
             </li>
-            <li className="nav-item">
+            <li >
               {user && (
-                <NavLink className="nav-link" to="/logout">
+              <NavLink className="my-nav-link" to="/logout" onClick={this.toggleNav}>
                   Logout
                 </NavLink>
               )}
             </li>
           </ul>
-        </div>
+
+        <i class="fas fa-bars" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={this.toggleNav}></i>
+
       </nav>
     );
   }

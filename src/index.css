@@ -17,6 +17,11 @@ h3 {
   font-size: 3rem;
 }
 
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+    color: inherit;
+}
+
 .my-btn-primary {
   background-color: var(--primary-color);
   border: var(--primary-color);
@@ -53,19 +58,75 @@ code {
 
 /* navigation styles */
 
-.navbar {
+.my-navbar {
   background-color: var(--primary-color);
-
+  display: flex;
+  min-height: 2rem;
 }
 
-.nav-link {
+.navbar-logo {
+  color: black;
+  margin-left: 2rem;
+  padding-top: 1rem;
+  text-transform: uppercase;
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  color: black;
+  padding-top: 1rem;
+  cursor: pointer;
+}
+
+.my-nav-link {
   font-weight: bold;
+  color: black;
+  padding: 0 1rem;
+  text-decoration: none;
+}
+
+.my-nav-link:click {
+  text-decoration: none;
+}
+
+
+.fas.fa-bars {
+  margin-left: auto;
+  margin-right: 1rem;
+  display: none;
+  padding-top: 1rem;
 }
 
 .-link,
 .-link:hover {
   text-decoration: none;
   color: inherit;
+}
+
+#display-menu {
+  display: flex;
+}
+
+@media only screen and (max-width: 801px) {
+  .fas.fa-bars {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.navbar-logo {
+  display: none;
+}
+
+.navbar-links {
+  flex-direction: column;
+  text-align: right;
+  width: 100%;
+  margin-top: 2rem;
+  display: none;
+}
+
 }
 
 /* homepage styles */
