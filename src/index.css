@@ -54,6 +54,7 @@ code {
 
 .content-container {
   padding: 5rem;
+  min-height: 80vh;
 }
 
 /* navigation styles */
@@ -413,6 +414,41 @@ code {
   width: 90%;
 }
 }
+
+
+/* basket page styles */
+
+.basket-tile {
+  width: 70%;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.basket-item {
+  height: 4rem;
+  width: 90%;
+  margin: auto;
+  border: 1px solid var(--secondary-color);
+}
+
+#purchase {
+  margin-top: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* 404 page styles */
