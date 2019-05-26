@@ -59,6 +59,13 @@ toggleNav = () => {
                 </NavLink>
               )}
             </li>
+          <li >
+            {user && (
+              <NavLink className="my-nav-link" to="/basket" onClick={this.toggleNav}>
+                My Basket
+                </NavLink>
+            )}
+          </li>
             <li >
               {user && (
               <NavLink className="my-nav-link" to="/logout" onClick={this.toggleNav}>

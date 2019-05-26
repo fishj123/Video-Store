@@ -11,6 +11,7 @@ import UserDashboard from './components/userDashboard';
 import auth from './services/authService';
 import Logout from "./components/logout";
 import PageNotFound from "./components/404";
+import Basket from './components/basket';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -32,6 +33,7 @@ class App extends Component {
         <main className="container-fluid">
           <Switch>
             <Route path="/movie/:title" render={props => <MoviePage {...props} user={user} />} />
+            <Route path="/basket" component={Basket} />
             <Route path="/catalogue" component={Movies} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
