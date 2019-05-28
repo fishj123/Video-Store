@@ -32,10 +32,8 @@ class MoviePage extends Component {
 
   stopRent = async movie => {
     const originalButton = this.state.button;
-
     const button = "rent";
     this.setState({ button });
-
     movie.copies++;
     this.setState({ movie });
 
@@ -79,7 +77,7 @@ class MoviePage extends Component {
     const user = this.state.user || {};
     const button = this.state.button;
 
-    let outOfStock = movie.copies === 0 ? true : false;
+    let outOfStock = movie.copies <= 0 ? true : false;
 
     return (
       <React.Fragment>

@@ -285,6 +285,10 @@ code {
   padding-left: 0.5rem;
 }
 
+.pagination {
+  margin-top: 1rem;
+}
+
 @media only screen and (max-width: 650px) {
   .pagination {
     display: flex;
@@ -431,7 +435,17 @@ code {
   margin-top: 1rem;
 }
 
+@media only screen and (max-width: 1025px) {
+  .basket-tile {
+    width: 90%;
+  }
+}
 
+@media only screen and (max-width: 400px) {
+  .basket-tile {
+    width: 100%;
+  }
+}
 
 
 /* 404 page styles */

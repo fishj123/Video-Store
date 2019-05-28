@@ -16,60 +16,11 @@ class Basket extends Component {
     return total;
   };
 
-  removeItem = item => {
-    const basket = JSON.parse(localStorage.getItem("basket"));
-    const newBasket = basket.filter(movie => movie._id !== item._id);
-    localStorage.setItem("basket", JSON.stringify(newBasket));
-    this.setState({ basket });
-  };
 
-  handleRent = async movies => {
-    let user = this.props.user;
-
-    try {
-      movies.forEach(movie => {
-        // movie.copies--;
-        const movieId = movie._id;
-        http.put(
-          "https://imbd-clone-api.herokuapp.com/api/users/rentals/" + user._id,
-          { rentals: movieId }
-        );
-      });
-      localStorage.removeItem("basket");
-      toast.success("Movies rented!");
-      this.setState({ message: "Thanks for your order!" });
-    } catch (ex) {
-      console.log(ex);
-      toast.error("Oops, something went wrong...");
-    }
-
-    // movie.copies--;
-    // this.setState({ movie });
-
-    // try {
-    //   console.log(movie);
-    //   let { user } = { ...this.state };
-    //   console.log(user);
-
-    //   const movieId = movie._id.trim();
-    //   http.put(
-    //     "https://imbd-clone-api.herokuapp.com/api/users/rentals/" + user._id,
-    //     { rentals: movieId }
-    //   );
-
-    //   const { data: userDB } = await getUserFromDb();
-    //   this.setState({ user: userDB[0] });
-    //   toast.success("Movie rented!");
-    // } catch (ex) {
-    //   this.setState({ button: originalButton });
-    //   toast.error("Oops, something went wrong :(");
-    //   console.log(ex);
-    // }
-  };
 
   render() {
     const items = JSON.parse(localStorage.getItem("basket")) || [];
-    const message = this.state.message;
+    const message = this.props.message;
 
     if (items.length === 0 && message.length > 0)
       return <h3 className="content-container">{message}</h3>;
@@ -94,7 +45,7 @@ class Basket extends Component {
                 <td>
                   <button
                     className="btn btn-danger"
-                    onClick={() => this.removeItem(item)}
+                    onClick={() => this.props.removeItem(item)}
                   >
                     X
                   </button>
@@ -116,7 +67,7 @@ class Basket extends Component {
         <button
           className="btn btn-success"
           id="purchase"
-          onClick={() => this.handleRent(items)}
+          onClick={() => this.props.handleRent(items)}
         >
           Purchase
         </button>

@@ -19,9 +19,8 @@ toggleNav = () => {
 
 }
 
-
   render() {
-    const { user } = this.props;
+    const { user, basket } = this.props;
     return (
       <nav className="my-navbar">
         <NavLink className="navbar-logo" to="/">
@@ -62,7 +61,7 @@ toggleNav = () => {
           <li >
             {user && (
               <NavLink className="my-nav-link" to="/basket" onClick={this.toggleNav}>
-                My Basket
+                My Basket ({basket.length})
                 </NavLink>
             )}
           </li>

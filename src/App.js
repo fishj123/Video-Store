@@ -18,7 +18,9 @@ import { toast } from "react-toastify";
 import http from "./services/httpService";
 
 class App extends Component {
-  state = {};
+  state = {
+    message: ""
+  };
 
   async componentDidMount() {
     const user = await auth.getCurrentUser();
@@ -35,12 +37,44 @@ class App extends Component {
     console.log(this.state.basket);
   };
 
+    removeItem = item => {
+    const basket = JSON.parse(localStorage.getItem("basket"));
+    const newBasket = basket.filter(movie => movie._id !== item._id);
+    localStorage.setItem("basket", JSON.stringify(newBasket));
+    this.forceUpdate();
+  };
+
+  handleRent = async movies => {
+    let user = this.state.user;
+
+    try {
+      movies.forEach(movie => {
+        // movie.copies--;
+        const movieId = movie._id;
+        http.put(
+          "https://imbd-clone-api.herokuapp.com/api/users/rentals/" + user._id,
+          { rentals: movieId }
+        );
+      });
+      localStorage.removeItem("basket");
+      toast.success("Movies rented!");
+      this.setState({ message: "Thanks for your order!" });
+    } catch (ex) {
+      console.log(ex);
+      toast.error("Oops, something went wrong...");
+    }
+
+  };
+
   render() {
-    const { user } = this.state;
+
+    const basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+    const { user, message } = this.state;
     return (
       <div className="App">
         <ToastContainer />
-        <NavBar user={user} />
+        <NavBar user={user} basket={basket} />
         <main className="container-fluid">
           <Switch>
             <Route
@@ -60,6 +94,9 @@ class App extends Component {
                   {...props}
                   items={this.state.basket}
                   user={this.state.user}
+                  removeItem={this.removeItem}
+                  handleRent={this.handleRent}
+                  message={message}
                 />
               )}
             />
