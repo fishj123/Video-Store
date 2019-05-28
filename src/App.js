@@ -19,7 +19,6 @@ import http from "./services/httpService";
 
 class App extends Component {
   state = {
-    basket: [],
   };
 
   async componentDidMount() {
@@ -28,9 +27,11 @@ class App extends Component {
   }
 
   addToBasket = movie => {
-    const basket = [...this.state.basket];
+    const basket = JSON.parse(localStorage.getItem("basket")) || [];
     basket.push(movie);
     this.setState({ basket });
+    const localStorageData = JSON.stringify(basket)
+    localStorage.setItem("basket", localStorageData)
     toast.success("Movie added to basket");
     console.log(this.state.basket);
   };

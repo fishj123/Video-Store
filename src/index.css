@@ -419,37 +419,16 @@ code {
 /* basket page styles */
 
 .basket-tile {
-  width: 70%;
+  width: 50%;
   margin: auto;
   border: 1px solid black;
   border-radius: 5px;
   padding: 1rem;
 }
 
-.basket-item {
-  height: 4rem;
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin: auto;
-  border: 1px solid var(--secondary-color);
-}
-
 #purchase {
   margin-top: 1rem;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
