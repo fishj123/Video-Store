@@ -18,8 +18,7 @@ import { toast } from "react-toastify";
 import http from "./services/httpService";
 
 class App extends Component {
-  state = {
-  };
+  state = {};
 
   async componentDidMount() {
     const user = await auth.getCurrentUser();
@@ -30,8 +29,8 @@ class App extends Component {
     const basket = JSON.parse(localStorage.getItem("basket")) || [];
     basket.push(movie);
     this.setState({ basket });
-    const localStorageData = JSON.stringify(basket)
-    localStorage.setItem("basket", localStorageData)
+    const localStorageData = JSON.stringify(basket);
+    localStorage.setItem("basket", localStorageData);
     toast.success("Movie added to basket");
     console.log(this.state.basket);
   };
@@ -56,7 +55,13 @@ class App extends Component {
             />
             <Route
               path="/basket"
-              render={props => <Basket {...props} items={this.state.basket} user={this.state.user} />}
+              render={props => (
+                <Basket
+                  {...props}
+                  items={this.state.basket}
+                  user={this.state.user}
+                />
+              )}
             />
             <Route path="/catalogue" component={Movies} />
             <Route path="/register" component={Register} />

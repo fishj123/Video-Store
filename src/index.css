@@ -83,6 +83,7 @@ code {
 
 .my-nav-link {
   font-weight: bold;
+  display: block;
   color: black;
   padding: 0 1rem;
   text-decoration: none;

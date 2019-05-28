@@ -74,36 +74,6 @@ class MoviePage extends Component {
   };
 
 
-
-  handleRent = async movie => {
-    const originalButton = this.state.button;
-    const button = "stop-rent";
-    this.setState({ button });
-
-    movie.copies--;
-    this.setState({ movie });
-
-    try {
-      console.log(movie);
-      let { user } = { ...this.state };
-      console.log(user);
-
-      const movieId = movie._id.trim();
-      http.put(
-        "https://imbd-clone-api.herokuapp.com/api/users/rentals/" + user._id,
-        { rentals: movieId }
-      );
-
-      const { data: userDB } = await getUserFromDb();
-      this.setState({ user: userDB[0] });
-      toast.success("Movie rented!");
-    } catch (ex) {
-      this.setState({ button: originalButton });
-      toast.error("Oops, something went wrong :(");
-      console.log(ex);
-    }
-  };
-
   render() {
     let movie = this.state.movie || this.props.location.state.movie;
     const user = this.state.user || {};
