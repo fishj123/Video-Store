@@ -39,15 +39,8 @@ toggleNav = () => {
             </li>
             <li >
               {!user && (
-              <NavLink className="my-nav-link" to="/register" onClick={this.toggleNav}>
-                  Register
-                </NavLink>
-              )}
-            </li>
-            <li >
-              {!user && (
               <NavLink className="my-nav-link" to="/login" onClick={this.toggleNav}>
-                  Login
+                  Login/Register
                 </NavLink>
               )}
             </li>

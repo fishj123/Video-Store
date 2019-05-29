@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 import auth from "../services/authService";
 import Form from "./common/form";
 import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 class Login extends Form {
   state = {
@@ -46,8 +47,17 @@ class Login extends Form {
           <form className="mt-3 input" onSubmit={this.handleSubmit}>
             {this.renderInput("username", "Email", "email")}
             {this.renderInput("password", "Password", "password")}
+            <p>Not registered? <Link to="/register" id="sign-up-link">Sign Up</Link></p>
             {this.renderButton("Login")}
           </form>
+        </div>
+
+        <div className="user-form">
+          <p>If you would like to checkout the user features without registering, you can use this test account:</p>
+          <div className="test-account">
+            <p>Email: account@gmail.com</p>
+            <p>Password: 12345678</p>
+          </div>
         </div>
       </div>
     );

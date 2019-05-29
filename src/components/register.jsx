@@ -4,6 +4,7 @@ import Joi from "joi-browser";
 import auth from "../services/authService";
 import * as userService from "../services/userService";
 import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 class Register extends Form {
   state = {
@@ -55,6 +56,7 @@ class Register extends Form {
             {this.renderInput("name", "Name")}
             {this.renderInput("username", "Email", "email")}
             {this.renderInput("password", "Password", "password")}
+            <p>Already registered? <Link to="/login" id="sign-up-link">Login</Link></p>
             {this.renderButton("Register")}
           </form>
         </div>
