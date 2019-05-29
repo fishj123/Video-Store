@@ -19,13 +19,14 @@ import http from "./services/httpService";
 
 class App extends Component {
   state = {
-    message: ""
   };
 
   async componentDidMount() {
     const user = await auth.getCurrentUser();
     this.setState({ user });
   }
+
+  
 
   addToBasket = movie => {
     const basket = JSON.parse(sessionStorage.getItem("basket")) || [];
@@ -41,7 +42,7 @@ class App extends Component {
     const basket = JSON.parse(sessionStorage.getItem("basket"));
     const newBasket = basket.filter(movie => movie._id !== item._id);
     sessionStorage.setItem("basket", JSON.stringify(newBasket));
-    this.setState({message: ""})
+    this.forceUpdate();
   };
 
   handleRent = async movies => {
@@ -57,8 +58,8 @@ class App extends Component {
         );
       });
       sessionStorage.removeItem("basket");
+      this.forceUpdate();
       toast.success("Movies rented!");
-      this.setState({ message: "Thanks for your order!" });
     } catch (ex) {
       console.log(ex);
       toast.error("Oops, something went wrong...");
@@ -88,7 +89,7 @@ class App extends Component {
 
     const basket = JSON.parse(sessionStorage.getItem("basket")) || [];
 
-    const { user, message } = this.state;
+    const { user } = this.state;
     return (
       <div className="App">
         <ToastContainer />
@@ -114,7 +115,7 @@ class App extends Component {
                   user={this.state.user}
                   removeItem={this.removeItem}
                   handleRent={this.handleRent}
-                  message={message}
+                 
                 />
               )}
             />

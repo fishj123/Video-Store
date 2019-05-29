@@ -4,7 +4,12 @@ import { toast } from "react-toastify";
 
 class Basket extends Component {
   state = {
-    message: ""
+    message: "",
+  };
+
+  doRent = items => {
+    this.props.handleRent(items);
+    this.setState({ message: "Thanks for your purchase!" });
   };
 
   totalPrice = items => {
@@ -16,11 +21,10 @@ class Basket extends Component {
     return total;
   };
 
-
-
   render() {
     const items = JSON.parse(sessionStorage.getItem("basket")) || [];
-    const message = this.props.message;
+
+    const message = this.state.message;
 
     if (items.length === 0 && message.length > 0)
       return <h3 className="content-container">{message}</h3>;
@@ -67,7 +71,7 @@ class Basket extends Component {
         <button
           className="btn btn-success"
           id="purchase"
-          onClick={() => this.props.handleRent(items)}
+          onClick={() => this.doRent(items)}
         >
           Purchase
         </button>
