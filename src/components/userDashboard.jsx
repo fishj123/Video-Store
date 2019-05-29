@@ -3,6 +3,7 @@ import auth from "../services/authService";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
 import http from "../services/httpService";
+import { getUserRentals } from "../services/moviesService";
 import MovieForm from "./movieForm";
 
 class UserDashboard extends Component {
@@ -14,6 +15,7 @@ class UserDashboard extends Component {
     const dbUser = await auth.getUserFromDb();
     if (!dbUser) return;
     this.setState({ user: dbUser.data[0] });
+    this.calculateDailyCharge();
   }
 
   handleMovieSubmit = e => {
@@ -21,12 +23,28 @@ class UserDashboard extends Component {
     console.log("submited");
   };
 
-  handleRemoveRent = (movie) => {
+  handleRemoveRent = movie => {
     let user = this.state.user;
-    user.rentals = user.rentals.filter(item => item._id !== movie._id)
-    this.setState({ user })
+    user.rentals = user.rentals.filter(item => item._id !== movie._id);
+    this.setState({ user });
+    this.props.removeRent(movie);
+    this.calculateDailyCharge();
+  };
 
-    this.props.removeRent(movie)
+  async calculateDailyCharge() {
+    const { user } = this.state;
+    let sum = 0;
+    try {
+      const rentals = await getUserRentals(user);
+
+      for (const array of rentals) {
+        sum += parseInt(array.rentalCost);
+      }
+      this.setState({ rent: sum });
+    } catch (ex) {
+      console.log(ex);
+      return 1;
+    }
   }
 
   render() {
@@ -60,18 +78,16 @@ class UserDashboard extends Component {
                 <tr>
                   <td>{movie.name}</td>
                   <td>
-                    <button className="btn btn-danger" onClick={() => this.handleRemoveRent(movie)}>X</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => this.handleRemoveRent(movie)}
+                    >
+                      X
+                    </button>
                   </td>
                 </tr>
               ))}
             </table>
-            {/* <ul className="list-group">
-              {user.rentals.map(movie => (
-                <li key={movie._id} className="list-group-item">
-                  {movie.name}
-                </li>
-              ))}
-            </ul> */}
           </section>
           <section className="col-md-12 col-xl-9" style={{ minHeight: "70vh" }}>
             {user.isAdmin && (
@@ -96,6 +112,9 @@ class UserDashboard extends Component {
                 </p>
               </section>
             )}
+            <h4 className="mt-3 text-danger">
+              Your current daily charge: £{this.state.rent}{" "}
+            </h4>
           </section>
         </div>
       </div>

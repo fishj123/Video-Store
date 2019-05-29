@@ -39,7 +39,7 @@ class Basket extends Component {
           <table className="table">
             <tr>
               <th>Title</th>
-              <th>Price</th>
+              <th>Price per day</th>
               <th />
             </tr>
             {items.map(item => (

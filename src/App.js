@@ -27,8 +27,6 @@ class App extends Component {
     this.setState({ user });
   }
 
-  
-
   addToBasket = movie => {
     const basket = JSON.parse(sessionStorage.getItem("basket")) || [];
     basket.push(movie);

@@ -2,6 +2,11 @@
   --primary-color: #4aafbc;
   --secondary-color: #c13458;
   --light-color: #f8f7f2;
+  --border-color: #ced4da;
+}
+
+#root {
+  min-height: 90vh;
 }
 
 * {
@@ -24,6 +29,11 @@ a:visited,
 a:focus {
   text-decoration: none;
   color: inherit;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  box-shadow: inherit;
 }
 
 .my-btn-primary {
@@ -137,6 +147,7 @@ code {
     margin-top: 2rem;
     display: none;
   }
+
 }
 
 /* homepage styles */
@@ -203,7 +214,6 @@ code {
   width: 12rem;
   height: 12rem;
   border-radius: 5px;
-  /* border: 1px solid var(--primary-color); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,6 +237,12 @@ code {
 }
 
 /* catalogue styles */
+
+.form-control.search {
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0;
+}
 
 .movie-container h1 {
   margin-bottom: 3rem;
@@ -433,13 +449,13 @@ code {
 .movie-form-container {
   width: 50%;
   margin: auto;
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 2rem;
 }
 
 .dash-column-left {
-  border-right: 1px solid black;
+  border-right: 1px solid var(--border-color);
 }
 
 @media only screen and (max-width: 1025px) {
@@ -458,9 +474,10 @@ code {
 .basket-tile {
   width: 50%;
   margin: auto;
-  border: 1px solid black;
-  border-radius: 5px;
+  border-bottom: 1px solid var(--border-color);
+  
   padding: 1rem;
+
 }
 
 #purchase {
