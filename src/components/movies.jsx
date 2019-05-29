@@ -101,11 +101,14 @@ class Movies extends Component {
         <div className="col-md-12 col-xl-9">
           <h3>Movies</h3>
           {this.state.movies.length === 0 && (
+            <React.Fragment>
             <div className="d-flex justify-content-center mt-5">
               <div className="spinner-border" role="status">
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only"></span>
               </div>
             </div>
+            <p className="mt-3">Loading Movies, please wait...</p>
+            </React.Fragment>
           )}
 
           {this.state.movies.length !== 0 && (

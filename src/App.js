@@ -41,7 +41,7 @@ class App extends Component {
     const basket = JSON.parse(sessionStorage.getItem("basket"));
     const newBasket = basket.filter(movie => movie._id !== item._id);
     sessionStorage.setItem("basket", JSON.stringify(newBasket));
-    this.forceUpdate();
+    this.setState({message: ""})
   };
 
   handleRent = async movies => {
@@ -65,6 +65,24 @@ class App extends Component {
     }
 
   };
+
+  removeRent = (movie) => {
+    const user = this.state.user;
+    try {
+      const movieId = movie._id;
+      http.put(
+        "https://imbd-clone-api.herokuapp.com/api/users/remove-rental/" +
+        user._id,
+        {
+          rentals: movieId,
+        }
+      );
+      toast.success("Movie Returned");
+    } catch (ex) {
+      toast.error("Oops, something went wrong :(")
+      console.log(ex)
+    }
+  }
 
   render() {
 
@@ -106,7 +124,7 @@ class App extends Component {
             <Route path="/logout" component={Logout} />
             <Route
               path="/me"
-              render={props => <UserDashboard {...props} user={user} />}
+              render={props => <UserDashboard {...props} user={user} removeRent={this.removeRent}/>}
             />
             <Route path="/" exact component={Home} />
             <Route path="/" component={PageNotFound} />

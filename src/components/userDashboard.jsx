@@ -3,7 +3,7 @@ import auth from "../services/authService";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
 import http from "../services/httpService";
-import MovieForm from './movieForm';
+import MovieForm from "./movieForm";
 
 class UserDashboard extends Component {
   state = {
@@ -16,43 +16,86 @@ class UserDashboard extends Component {
     this.setState({ user: dbUser.data[0] });
   }
 
-  handleMovieSubmit = (e) => {
-    e.preventDefault()
-    console.log("submited")
+  handleMovieSubmit = e => {
+    e.preventDefault();
+    console.log("submited");
+  };
+
+  handleRemoveRent = (movie) => {
+    let user = this.state.user;
+    user.rentals = user.rentals.filter(item => item._id !== movie._id)
+    this.setState({ user })
+
+    this.props.removeRent(movie)
   }
 
   render() {
     const { user } = this.state;
-    if (!user.name) return null;
+    if (!user.name)
+      return (
+        <div className="content-container">
+          {" "}
+          <React.Fragment>
+            <div className="d-flex justify-content-center mt-5">
+              <div className="spinner-border" role="status">
+                <span className="sr-only" />
+              </div>
+            </div>
+            <p className="mt-3">Loading Dashboard, please wait...</p>
+          </React.Fragment>
+        </div>
+      );
 
     return (
       <div className="content-container">
         <div className="row">
           <section className="col-md-12 col-xl-3 dash-column-left">
             <h3>My Rentals</h3>
-            <ul className="list-group">
+            <table className="table">
+              <tr>
+                <th>Movie</th>
+                <th>Stop Renting</th>
+              </tr>
+              {user.rentals.map(movie => (
+                <tr>
+                  <td>{movie.name}</td>
+                  <td>
+                    <button className="btn btn-danger" onClick={() => this.handleRemoveRent(movie)}>X</button>
+                  </td>
+                </tr>
+              ))}
+            </table>
+            {/* <ul className="list-group">
               {user.rentals.map(movie => (
                 <li key={movie._id} className="list-group-item">
                   {movie.name}
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </section>
-          <section className="col-md-12 col-xl-9" style={{minHeight: "70vh"}}>
+          <section className="col-md-12 col-xl-9" style={{ minHeight: "70vh" }}>
+            {user.isAdmin && (
+              <section>
+                <h3>Admin Dashboard - {user.name}</h3>
+                <div className="movie-form-container">
+                  <MovieForm />
+                </div>
+              </section>
+            )}
 
-          {user.isAdmin && <section>
-            <h3>Admin Dashboard - {user.name}</h3>
-            <div className="movie-form-container">
-           < MovieForm />
-            </div>
-            </section>}
-
-            {!user.isAdmin && <section>
-              <h3>User Dashboard - {user.name}</h3>
-              <p style={{width: "60%", margin: "auto"}}>You do not have admin rights therefore you cannot upload new movies to the database. If you think you should have admin rights please email us at <a href="mailto:thisemailisfake@gmail.com">ThisEmailIsFake@gmail.com</a></p>
-            </section>}
-
-
+            {!user.isAdmin && (
+              <section>
+                <h3>User Dashboard - {user.name}</h3>
+                <p style={{ width: "60%", margin: "auto" }}>
+                  You do not have admin rights therefore you cannot upload new
+                  movies to the database. If you think you should have admin
+                  rights please email us at{" "}
+                  <a href="mailto:thisemailisfake@gmail.com">
+                    ThisEmailIsFake@gmail.com
+                  </a>
+                </p>
+              </section>
+            )}
           </section>
         </div>
       </div>
