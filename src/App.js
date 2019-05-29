@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import http from "./services/httpService";
+import { stopRent, startRent } from './services/moviesService';
 
 class App extends Component {
   state = {
@@ -38,7 +39,7 @@ class App extends Component {
     const basketNav = document.getElementById("basket-count");
     
     basketNav.setAttribute("class", "basket-animation");
-    setTimeout(() => { basketNav.removeAttribute("class") }, 500)
+    setTimeout(() => { basketNav.removeAttribute("class") }, 1500)
     
     toast.success("Movie added to basket");
     console.log(this.state.basket);
@@ -58,10 +59,7 @@ class App extends Component {
       movies.forEach(movie => {
         // movie.copies--;
         const movieId = movie._id;
-        http.put(
-          "https://imbd-clone-api.herokuapp.com/api/users/rentals/" + user._id,
-          { rentals: movieId }
-        );
+        startRent(user, movieId);
       });
       sessionStorage.removeItem("basket");
       this.forceUpdate();
@@ -77,13 +75,7 @@ class App extends Component {
     const user = this.state.user;
     try {
       const movieId = movie._id;
-      http.put(
-        "https://imbd-clone-api.herokuapp.com/api/users/remove-rental/" +
-        user._id,
-        {
-          rentals: movieId,
-        }
-      );
+      stopRent(user, movieId);
       toast.success("Movie Returned");
     } catch (ex) {
       toast.error("Oops, something went wrong :(")

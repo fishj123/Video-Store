@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import http from "../services/httpService";
 import auth, { getUserFromDb } from "../services/authService";
 import { toast } from "react-toastify";
+import { stopRent } from "../services/moviesService";
 
 class MoviePage extends Component {
   state = {
@@ -37,17 +38,10 @@ class MoviePage extends Component {
     movie.copies++;
     this.setState({ movie });
 
+    const user = this.state.user;
+    const movieId = movie._id;
     try {
-      const user = this.state.user;
-      const movieId = movie._id;
-      http.put(
-        "https://imbd-clone-api.herokuapp.com/api/users/remove-rental/" +
-          user._id,
-        {
-          rentals: movieId,
-        }
-      );
-
+      stopRent(user, movieId)
       const { data: userDB } = await getUserFromDb();
       this.setState({ user: userDB[0] });
       toast.success("Movie returned!")
@@ -70,6 +64,23 @@ class MoviePage extends Component {
     });
     return bool;
   };
+
+  checkBasket = () => {
+    const { movie } = this.state;
+    const basket = JSON.parse(sessionStorage.getItem("basket"));
+    if(!basket) return false;
+    let bool = false;
+    console.log(basket)
+    console.log(movie);
+
+    basket.forEach(item => {
+      if(item._id === movie._id) {
+        bool = true;
+        return;
+      }
+    })
+    return bool;
+  }
 
 
   render() {
@@ -95,7 +106,8 @@ class MoviePage extends Component {
               <p>Genre: {movie.genre.name}</p>
               <p>Rental Cost: £{movie.rentalCost} per day</p>
               <p className={outOfStock ? "text-danger" : ""}>Number in stock: {movie.copies}</p>
-              {user.name && button === "rent" && (
+              
+              {user.name && button === "rent" && !this.checkBasket() && (
                 <button
                   className={outOfStock ? "btn btn-secondary disabled" : "btn my-btn-primary"}
                   disabled={outOfStock}
