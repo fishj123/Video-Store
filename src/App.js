@@ -34,6 +34,12 @@ class App extends Component {
     this.setState({ basket });
     const sessionStorageData = JSON.stringify(basket);
     sessionStorage.setItem("basket", sessionStorageData);
+    
+    const basketNav = document.getElementById("basket-count");
+    
+    basketNav.setAttribute("class", "basket-animation");
+    setTimeout(() => { basketNav.removeAttribute("class") }, 500)
+    
     toast.success("Movie added to basket");
     console.log(this.state.basket);
   };

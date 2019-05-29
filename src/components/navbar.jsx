@@ -54,7 +54,7 @@ toggleNav = () => {
           <li >
             {user && (
               <NavLink className="my-nav-link" to="/basket" onClick={this.toggleNav}>
-                My Basket ({basket.length})
+                My Basket (<span id="basket-count">{basket.length}</span>)
                 </NavLink>
             )}
           </li>

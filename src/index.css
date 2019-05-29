@@ -104,6 +104,22 @@ code {
   display: flex;
 }
 
+.basket-animation {
+  animation: basket 1.5s;
+}
+
+@keyframes basket {
+  0% {
+    color: inherit;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: inherit;
+  }
+}
+
 @media only screen and (max-width: 801px) {
   .fas.fa-bars {
     display: block;
@@ -386,10 +402,10 @@ code {
   }
 
   .test-account {
-  text-align: left;
-  width: 90%;
-  margin: auto;
-}
+    text-align: left;
+    width: 90%;
+    margin: auto;
+  }
 
   .user-form {
     width: 95%;
