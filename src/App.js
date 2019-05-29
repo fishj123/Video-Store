@@ -28,19 +28,19 @@ class App extends Component {
   }
 
   addToBasket = movie => {
-    const basket = JSON.parse(localStorage.getItem("basket")) || [];
+    const basket = JSON.parse(sessionStorage.getItem("basket")) || [];
     basket.push(movie);
     this.setState({ basket });
-    const localStorageData = JSON.stringify(basket);
-    localStorage.setItem("basket", localStorageData);
+    const sessionStorageData = JSON.stringify(basket);
+    sessionStorage.setItem("basket", sessionStorageData);
     toast.success("Movie added to basket");
     console.log(this.state.basket);
   };
 
     removeItem = item => {
-    const basket = JSON.parse(localStorage.getItem("basket"));
+    const basket = JSON.parse(sessionStorage.getItem("basket"));
     const newBasket = basket.filter(movie => movie._id !== item._id);
-    localStorage.setItem("basket", JSON.stringify(newBasket));
+    sessionStorage.setItem("basket", JSON.stringify(newBasket));
     this.forceUpdate();
   };
 
@@ -56,7 +56,7 @@ class App extends Component {
           { rentals: movieId }
         );
       });
-      localStorage.removeItem("basket");
+      sessionStorage.removeItem("basket");
       toast.success("Movies rented!");
       this.setState({ message: "Thanks for your order!" });
     } catch (ex) {
@@ -68,7 +68,7 @@ class App extends Component {
 
   render() {
 
-    const basket = JSON.parse(localStorage.getItem("basket")) || [];
+    const basket = JSON.parse(sessionStorage.getItem("basket")) || [];
 
     const { user, message } = this.state;
     return (

@@ -19,7 +19,7 @@ class Basket extends Component {
 
 
   render() {
-    const items = JSON.parse(localStorage.getItem("basket")) || [];
+    const items = JSON.parse(sessionStorage.getItem("basket")) || [];
     const message = this.props.message;
 
     if (items.length === 0 && message.length > 0)

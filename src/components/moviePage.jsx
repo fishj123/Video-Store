@@ -14,7 +14,6 @@ class MoviePage extends Component {
   async componentDidMount() {
     window.scrollTo(0, 0)
     try {
-      
       const { data: user } = await getUserFromDb();
       if (!user) return;
       this.setState({ user: user[0] });
@@ -22,7 +21,8 @@ class MoviePage extends Component {
       return;
     }
 
-    const { movie } = this.props.location.state;
+    if (!this.props.location.state) window.location = "/"
+    const movie  = this.props.location.state.movie;
     this.setState({ movie });
 
     const button = this.checkRentals() ? "stop-rent" : "rent";
@@ -73,7 +73,8 @@ class MoviePage extends Component {
 
 
   render() {
-    let movie = this.state.movie || this.props.location.state.movie;
+    if(!this.state.movie) return null;
+    let { movie } = this.state; 
     const user = this.state.user || {};
     const button = this.state.button;
 
