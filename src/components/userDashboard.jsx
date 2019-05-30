@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import auth from "../services/authService";
-import { Link } from "react-router-dom";
-import slugify from "slugify";
-import http from "../services/httpService";
 import { getUserRentals } from "../services/moviesService";
 import MovieForm from "./movieForm";
 

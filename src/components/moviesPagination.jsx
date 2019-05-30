@@ -25,7 +25,7 @@ class MoviesPagination extends Component {
               }
               onClick={() => handlePageChange(page)}
             >
-              <a className="page-link">{page}</a>
+              <span className="page-link">{page}</span>
             </li>
           ))}
         </ul>

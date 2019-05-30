@@ -8,14 +8,13 @@ import Register from "./components/register";
 import Login from "./components/login";
 import MoviePage from "./components/moviePage";
 import UserDashboard from "./components/userDashboard";
-import auth, { getUserFromDb } from "./services/authService";
+import auth from "./services/authService";
 import Logout from "./components/logout";
 import PageNotFound from "./components/404";
 import Basket from "./components/basket";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import http from "./services/httpService";
 import { stopRent, startRent } from './services/moviesService';
 
 class App extends Component {

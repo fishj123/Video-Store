@@ -120,7 +120,7 @@ class Movies extends Component {
           {this.state.movies.length !== 0 && (
             <p>Currently displaying {movies.length} movie(s)</p>
           )}
-          {displayedMovies.length === 0 && this.state.movies.length != "0" && (
+          {displayedMovies.length === 0 && this.state.movies.length !== "0" && (
             <p>There are no movies that fit these search results.</p>
           )}
           <MovieCard displayedMovies={displayedMovies} />

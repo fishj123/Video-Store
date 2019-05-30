@@ -6,7 +6,6 @@ class NavBar extends Component {
   state = {};
 
 toggleNav = () => {
-  const burgerMenu = document.getElementById("burger");
   const navItems = document.querySelector(".navbar-links")
 
   if (navItems.hasAttribute("id")) {

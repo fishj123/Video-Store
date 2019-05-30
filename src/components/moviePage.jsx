@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import http from "../services/httpService";
-import auth, { getUserFromDb } from "../services/authService";
+import { getUserFromDb } from "../services/authService";
 import { toast } from "react-toastify";
 import { stopRent } from "../services/moviesService";
 

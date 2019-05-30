@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import http from "../services/httpService";
-import { toast } from "react-toastify";
 
 class Basket extends Component {
   state = {
@@ -37,13 +35,14 @@ class Basket extends Component {
         <h3>Basket</h3>
         <div className="basket-tile">
           <table className="table">
+            <tbody>
             <tr>
               <th>Title</th>
               <th>Price per day</th>
               <th />
             </tr>
             {items.map(item => (
-              <tr>
+              <tr key={item._id}>
                 <td>{item.title}</td>
                 <td>£{item.rentalCost}</td>
                 <td>
@@ -65,6 +64,7 @@ class Basket extends Component {
               </td>
               <td />
             </tr>
+            </tbody>
           </table>
         </div>
 

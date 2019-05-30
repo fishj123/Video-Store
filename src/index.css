@@ -321,6 +321,10 @@ code {
   margin-top: 1rem;
 }
 
+span.page-link {
+  color: black;
+}
+
 @media only screen and (max-width: 650px) {
   .pagination {
     display: flex;
