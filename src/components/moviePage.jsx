@@ -12,23 +12,26 @@ class MoviePage extends Component {
   };
 
   async componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     try {
-      const { data: user } = await getUserFromDb();
-      if (!user) return;
-      this.setState({ user: user[0] });
+      const response = await getUserFromDb();
+      if (response !== null) {
+        const user = response.data[0];
+        this.setState({ user });
+      }
     } catch (ex) {
+      console.log(ex);
       return;
     }
 
-    if (!this.props.location.state) window.location = "/"
-    const movie  = this.props.location.state.movie;
+    console.log(this.props.location.state);
+    if (!this.props.location.state) window.location = "/";
+    const movie = this.props.location.state.movie;
     this.setState({ movie });
 
     const button = this.checkRentals() ? "stop-rent" : "rent";
     this.setState({ button });
   }
-
 
   stopRent = async movie => {
     const originalButton = this.state.button;
@@ -40,13 +43,13 @@ class MoviePage extends Component {
     const user = this.state.user;
     const movieId = movie._id;
     try {
-      stopRent(user, movieId)
+      stopRent(user, movieId);
       const { data: userDB } = await getUserFromDb();
       this.setState({ user: userDB[0] });
-      toast.success("Movie returned!")
+      toast.success("Movie returned!");
     } catch (ex) {
       this.setState({ button: originalButton });
-      toast.error("Oops, something went wrong :(")
+      toast.error("Oops, something went wrong :(");
     }
   };
 
@@ -67,24 +70,23 @@ class MoviePage extends Component {
   checkBasket = () => {
     const { movie } = this.state;
     const basket = JSON.parse(sessionStorage.getItem("basket"));
-    if(!basket) return false;
+    if (!basket) return false;
     let bool = false;
-    console.log(basket)
+    console.log(basket);
     console.log(movie);
 
     basket.forEach(item => {
-      if(item._id === movie._id) {
+      if (item._id === movie._id) {
         bool = true;
         return;
       }
-    })
+    });
     return bool;
-  }
-
+  };
 
   render() {
-    if(!this.state.movie) return null;
-    let { movie } = this.state; 
+    if (!this.state.movie) return null;
+    let { movie } = this.state;
     const user = this.state.user || {};
     const button = this.state.button;
 
@@ -104,11 +106,17 @@ class MoviePage extends Component {
               <p>Title: {movie.title}</p>
               <p>Genre: {movie.genre.name}</p>
               <p>Rental Cost: £{movie.rentalCost} per day</p>
-              <p className={outOfStock ? "text-danger" : ""}>Number in stock: {movie.copies}</p>
-              
+              <p className={outOfStock ? "text-danger" : ""}>
+                Number in stock: {movie.copies}
+              </p>
+
               {user.name && button === "rent" && !this.checkBasket() && (
                 <button
-                  className={outOfStock ? "btn btn-secondary disabled" : "btn my-btn-primary"}
+                  className={
+                    outOfStock
+                      ? "btn btn-secondary disabled"
+                      : "btn my-btn-primary"
+                  }
                   disabled={outOfStock}
                   aria-disabled={outOfStock}
                   onClick={() => this.props.addToBasket(movie)}
