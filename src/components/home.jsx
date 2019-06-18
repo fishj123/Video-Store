@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Home extends Component {
   state = {};
@@ -10,13 +10,13 @@ class Home extends Component {
           <div className="col-md-12 hero">
             <h1>Video Store</h1>
             <div className="hero-img-container">
-              <img className="camera-img" src="/images/camera.png" alt=""/>
+              <img className="camera-img" src="/images/camera.png" alt="" />
             </div>
           </div>
           <div className="col-md-12 how-it-works">
             <h3>How it works</h3>
-            </div>
-            <div className="col-md-12 home-boxes-container">
+          </div>
+          <div className="col-md-12 home-boxes-container">
             <div className="how-it-works-boxes">
               <p className="number">1</p> <p>Sign up for a user account</p>
             </div>
@@ -31,7 +31,9 @@ class Home extends Component {
             </div>
           </div>
           <div className="col-md-12 mb-5">
-            <Link to="/catalogue" className="btn my-btn-primary">Start Browsing</Link>
+            <Link to="/catalogue" className="btn my-btn-primary">
+              Start Browsing
+            </Link>
           </div>
         </div>
       </React.Fragment>

@@ -15,11 +15,10 @@ import Basket from "./components/basket";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { stopRent, startRent } from './services/moviesService';
+import { stopRent, startRent } from "./services/moviesService";
 
 class App extends Component {
-  state = {
-  };
+  state = {};
 
   async componentDidMount() {
     const user = await auth.getCurrentUser();
@@ -32,17 +31,19 @@ class App extends Component {
     this.setState({ basket });
     const sessionStorageData = JSON.stringify(basket);
     sessionStorage.setItem("basket", sessionStorageData);
-    
+
     const basketNav = document.getElementById("basket-count");
-    
+
     basketNav.setAttribute("class", "basket-animation");
-    setTimeout(() => { basketNav.removeAttribute("class") }, 1500)
-    
+    setTimeout(() => {
+      basketNav.removeAttribute("class");
+    }, 1500);
+
     toast.success("Movie added to basket");
     console.log(this.state.basket);
   };
 
-    removeItem = item => {
+  removeItem = item => {
     const basket = JSON.parse(sessionStorage.getItem("basket"));
     const newBasket = basket.filter(movie => movie._id !== item._id);
     sessionStorage.setItem("basket", JSON.stringify(newBasket));
@@ -65,23 +66,21 @@ class App extends Component {
       console.log(ex);
       toast.error("Oops, something went wrong...");
     }
-
   };
 
-  removeRent = (movie) => {
+  removeRent = movie => {
     const user = this.state.user;
     try {
       const movieId = movie._id;
       stopRent(user, movieId);
       toast.success("Movie Returned");
     } catch (ex) {
-      toast.error("Oops, something went wrong :(")
-      console.log(ex)
+      toast.error("Oops, something went wrong :(");
+      console.log(ex);
     }
-  }
+  };
 
   render() {
-
     const basket = JSON.parse(sessionStorage.getItem("basket")) || [];
 
     const { user } = this.state;
@@ -89,7 +88,7 @@ class App extends Component {
       <div className="App">
         <ToastContainer />
         <NavBar user={user} basket={basket} />
-        <main className="container-fluid">
+        <main data-testid="app" className="container-fluid">
           <Switch>
             <Route
               path="/movie/:title"
@@ -110,7 +109,6 @@ class App extends Component {
                   user={this.state.user}
                   removeItem={this.removeItem}
                   handleRent={this.handleRent}
-                 
                 />
               )}
             />
@@ -120,7 +118,13 @@ class App extends Component {
             <Route path="/logout" component={Logout} />
             <Route
               path="/me"
-              render={props => <UserDashboard {...props} user={user} removeRent={this.removeRent}/>}
+              render={props => (
+                <UserDashboard
+                  {...props}
+                  user={user}
+                  removeRent={this.removeRent}
+                />
+              )}
             />
             <Route path="/" exact component={Home} />
             <Route path="/" component={PageNotFound} />
